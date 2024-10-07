@@ -13,6 +13,7 @@ export class MyInfo_PersonalDetails{
         this.dateOfBirth = ':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-date-wrapper > .oxd-date-input > .oxd-input';
         this.maleCheckbox = 'input[type="radio"][value="1"]';
         this.femaleCheckBox = 'input[type="radio"][value="2"]';
+        this.btnAddAttachment = 'button[class="oxd-button oxd-button--medium oxd-button--text"]';
     }
         setFirstName(firstName) {
             cy.get(this.firstName).clear().type(firstName);
@@ -187,5 +188,10 @@ export class MyInfo_PersonalDetails{
             this.setMaritalStatus(details.marialStatus);
             this.setDateOfBirth(details.dateOfBirth);
             this.setGender(details.gender);
+        }
+
+        click_add_attachment()
+        {
+            cy.get(this.btnAddAttachment).click();
         }
     }

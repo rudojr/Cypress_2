@@ -1,5 +1,6 @@
 import { MyInfo_PersonalDetails } from "../../Pages/Page_MyInfo/PAGE_MyInfo_PersonalDetails";
 import { LoginPage } from "../../Pages/Page_Admin/PAGE_Admin_Login";
+import 'cypress-file-upload'
 
 const loginPage = new LoginPage();
 const personalDetails = new MyInfo_PersonalDetails();
@@ -110,5 +111,12 @@ describe('Change Personal Details in MyInfo', () => {
                 gender: getRandomGender(),
             };
             personalDetails.setPersonalDetails(details);
+        })
+
+        it('Should load attachment successfully',()=>{
+            personalDetails.click_add_attachment();
+            cy.get('#app > div.oxd-layout.orangehrm-upgrade-layout > div.oxd-layout-container > div.oxd-layout-context > div > div > div > div.orangehrm-edit-employee-content > div.orangehrm-attachment > div > form > div:nth-child(1) > div > div > div > div:nth-child(2) > div').attachFile('lena.png');
+            cy.get('.oxd-textarea').type("Attach file");
+            cy.get('.orangehrm-attachment > .orangehrm-card-container > .oxd-form > .oxd-form-actions > .oxd-button--secondary').click();
         })
 })
