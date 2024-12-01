@@ -27,6 +27,7 @@ describe('Get Data from API List',()=>{
         const middleName = `MiddleName${Math.floor(Math.random() * 1000)}`;
         const lastName = `LastName${Math.floor(Math.random() * 1000)}`;
         const employeeId = Math.floor(Math.random() * 100000000).toString();
+        
         it('Should add employee successfully',()=>{
             
             //
@@ -86,33 +87,33 @@ describe('Get Data from API List',()=>{
             });
         })
 
-        // it('Should delete an employee from the API',()=>{
-        //     cy.log('Selected employee ID for deletion: ', empNumber);
+        it('Should delete an employee from the API',()=>{
+            cy.log('Selected employee ID for deletion: ', empNumber);
         
-        //     cy.request({
-        //             method: 'DELETE',
-        //             url: 'https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/pim/employees',
-        //             body: {
-        //                 ids: [empNumber]
-        //             },
-        //             failOnStatusCode: false
-        //         }).then((response) => {
-        //             expect(response.status).to.eq(200);
-        //             cy.log('Employee deleted successfully: ', response.body);
-        //         });
+            cy.request({
+                    method: 'DELETE',
+                    url: 'https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/pim/employees',
+                    body: {
+                        ids: [empNumber]
+                    },
+                    failOnStatusCode: false
+                }).then((response) => {
+                    expect(response.status).to.eq(200);
+                    cy.log('Employee deleted successfully: ', response.body);
+                });
             
-        //     cy.request({
-        //         method: 'GET',
-        //         url: 'https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/pim/employees?limit=50&offset=0&model=detailed&includeEmployees=onlyCurrent&sortField=employee.firstName&sortOrder=ASC',
-        //     }).then((response) => {
-        //         expect(response.status).to.eq(200);
-        //         expect(response.body).to.have.property('data');
+            cy.request({
+                method: 'GET',
+                url: 'https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/pim/employees?limit=50&offset=0&model=detailed&includeEmployees=onlyCurrent&sortField=employee.firstName&sortOrder=ASC',
+            }).then((response) => {
+                expect(response.status).to.eq(200);
+                expect(response.body).to.have.property('data');
     
-        //         const employees = response.body.data;
+                const employees = response.body.data;
     
-        //         const deletedEmployee = employees.find(emp => emp.id === empNumber);
-        //         expect(deletedEmployee).to.be.undefined; 
-        //         cy.log('Verified employee with ID ' + empNumber + ' has been deleted.');
-        //     });
-        // })
+                const deletedEmployee = employees.find(emp => emp.id === empNumber);
+                expect(deletedEmployee).to.be.undefined; 
+                cy.log('Verified employee with ID ' + empNumber + ' has been deleted.');
+            });
+        })
     })

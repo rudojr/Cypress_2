@@ -37,6 +37,16 @@ export class EmployeeList{
         cy.get(this.subUnit).click();
         cy.get('.oxd-select-dropdown').contains(unit).click();
     }
+    click_search()
+    {
+        cy.get(this.btnSearch).click()
+    }
+
+    click_reset()
+    {
+        cy.get(this.btnReset).click()
+    }
+    
     getNumberOfRecords() {
         return cy.get(this.tblRecords)  
           .find('.oxd-table-card > .oxd-table-row')  
